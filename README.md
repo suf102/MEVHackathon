@@ -19,7 +19,7 @@ I used the pivot table to work out the occurrences of each state tansitioning in
 What this matrix allows you to read off is given the current level of MEV in the current block, what is the chance of being at any other level in the next time period. 
 This is an extremely fast bit of code to deploy, the matrix only takes a few minutes to make, and you only need the previous blocks MEV state to work out probabilities for the next one, once you have the matrix. 
 …
-### DL approximation of the Markov chain. 
+### DL NN approximation of the Markov chain. 
 Here I took a slightly different approach, instead of manually constructing the transition matrix I approximated it with a DL neural network. The DL nural network has 4 hidden layers each of which are 4 deep. 
 This is to replicate the Markov chain matrix. This model took much longer to train than the Markov chain, and would be more difficult to update than the the Markov chain, due to the difficultites of having enough data to form a new batch and running the retraiign which takes approximately 4 hours. 
 However, in deployment other than the conversion to tensors of the input data it is also pretty quick as one only needs to pass a 4d vector thought he model to get a prediction. 
