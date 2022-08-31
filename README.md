@@ -39,3 +39,13 @@ Also going into a bear market for crypto for the first time we don’t know how 
 Second we wanted to avoid going back too far in etheriums history as MEV is relatively new and going back too far might become unrepresentative of the current market, making prediction harder. 
 
 Overall data selection and retrieval was very difficult, not only because access to the nodes was difficult but because detective MEV Is tricky on its on. Based on the data we have I was able to make these 4 models. 
+
+# Further work
+
+The most imediate further work that could be done would be to include more types of MEV, allowing for a more accurate picture of what the maxiumum extractable value acutally is. 
+
+Second, more data is needed for the model, ideally 12million rows, which eqates to 10% roughly of the etherium blocks mined.
+
+Third, A lassoCV Model applied to this data usign a few more parameters this might give a better results as it would include more exogenous factors. 
+
+Fourth, the use of a LSTM NN, would probably be best for continuous deployment of an MEV predictor. However exceptional computing power would be needd to make it efficent enough to run in real time. 
