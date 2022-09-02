@@ -22,8 +22,8 @@ Lastly I used a more general nn model, this would take the previous n MEV states
 The Process of making this chain was relatively simple using the inbuilt pivot table function in Pandas. 
 I used the pivot table to work out the occurrences of each state tansitioning into another then divided by the count of the original state to give the conditional probability. 
 What this matrix allows you to read off is given the current level of MEV in the current block, what is the chance of being at any other level in the next time period. 
-This is an extremely fast bit of code to deploy, the matrix only takes a few minutes to make, and you only need the previous blocks MEV state to work out probabilities for the next one, once you have the matrix. 
-…
+This is an extremely fast bit of code to deploy, the matrix only takes a few minutes to make, and you only need the previous blocks MEV state to work out probabilities for the next one, once you have the matrix. Updating the matrix after every block also seems to be a feasible strategy, however given the amount of data I would like to work with idealy adding one days worth of data will make little difference anyway so it may as well be rerun once a day rather than updated after every block.
+
 ### DL NN approximation of the Markov chain. 
 Here I took a slightly different approach, instead of manually constructing the transition matrix I approximated it with a DL neural network. The DL nural network has 4 hidden layers each of which are 4 deep. 
 This is to replicate the Markov chain matrix. This model took much longer to train than the Markov chain, and would be more difficult to update than the the Markov chain, due to the difficultites of having enough data to form a new batch and running the retraiign which takes approximately 4 hours. 
