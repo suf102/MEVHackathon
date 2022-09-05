@@ -51,6 +51,6 @@ Second, more data is needed for the model, ideally 12million rows, which equates
 
 Third, A lassoCV Model applied to this data using a few more parameters this might give a better results as it would include more exogenous factors. 
 
-Fourth, the use of a LSTM NN, would probably be best for continuous deployment of an MEV predictor. However exceptional computing power would be needed to make it efficient enough to run in real time. 
+Fourth, the use of a LSTM NN, would probably be best for continuous deployment of an MEV predictor. However exceptional computing power might be needed to make it efficient enough to run in real time. 
 
 
