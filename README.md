@@ -1,9 +1,7 @@
 ### Note this is a work in progress. 
-At the moment I am still working with dummy data, I have included the files to make the dummy data. Edit I have also added new files that will run the same code but with gas fees and price volatility considered. I have also included the files needed to make the dummy data if one is so inclined. 
+At the moment I am still working with dummy data, I have included the files to make the dummy data. Edit I have also added new files that will run the same code but with gas fees and price volatility considered, If the file ends in wgv(with gas fees and volatility) it means it is the version of the files designed to consider those additional factors. I have also included the files needed to make the dummy data if one is so inclined. 
 
 If you would like to give this a go yourself, first check out the Eth data folder for the files needed to make the data. Then go to data prep to split the data into sequences of length n. This should give you something to work with of the right structure. Third under the Markov chain approach folder you will find the files needed to make the transition matrix the standard way, and the file use DL to approximate it. Lastly in the Deep learning models folder you will find the deep learning models I am working on. Enjoy ! 
-
-#### Note the DL models have been written with a CUDA GPU and 12 core processor in mind, some edits might be needed if you want to run it on your own machine. I have pointed out in the code where this is.
 
 # Mev-hackaton
 
