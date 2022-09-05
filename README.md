@@ -10,7 +10,7 @@ Having been handed off the data classified into high, medium, low and none MEV c
 The time column of the data was based on the block number. 
 We are using 12 million data points which is about 10% of the Ethereum mined. 
 To split the data into a more useful format I created sequences of MEV levels. 
-I created a list of all of the sequences of length 2 through 9 of MEV levels that have occurred in those 12 million blocks. 
+I created a list of all of the sequences of length 2 through 9 of MEV levels that have occurred in those 10k blocks. 
 The block number was also dropped to avoid it influencing the training of the models. 
 From here I split the approach into three different directions. 
 The first was to create a Markov chains transition matrix using the data. 
