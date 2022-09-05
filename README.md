@@ -8,7 +8,7 @@ If you would like to give this a go yourself, first check out the Eth data folde
 ## Stochastic models and Neural networks
 Having been handed off the data classified into high, medium, low and none MEV categories. 
 The time column of the data was based on the block number. 
-We are using 12 million data points which is about 10% of the Ethereum mined. 
+We are using ~10k data points, ideally we would have 12 million data points which is about 10% of the Ethereum mined, but currently MEV inspect runs too slowly for it to be practical to do so. 
 To split the data into a more useful format I created sequences of MEV levels. 
 I created a list of all of the sequences of length 2 through 9 of MEV levels that have occurred in those 10k blocks. 
 The block number was also dropped to avoid it influencing the training of the models. 
