@@ -33,7 +33,7 @@ DataPrep/../datalets/datalet2.csv
 DataPrep/../datalets/datalet3.csv
 DataPrep/../datalets/datalet4.csv
 DataPrep/../datalets/datalet5.csv
-.gitignore
 DataPrep/../datalets/datalet7.csv
 DataPrep/../datalets/datalet8.csv
 DataPrep/../datalets/datalet9.csv
+Ethdata/latest_blocks.json
