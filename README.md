@@ -1,3 +1,10 @@
+# MEV hackathon
+This is a submission for the encode and wintermute hackathon, September 2022.
+
+## Aims and Introduction
+In this repo, we utilse markov chains and deep learning models in order to assess whether MEV can be predicted as a state change given a previous n number of blocks. 
+
+
 ## Methodology 
 Firstly, we have extracted MEV based data from the online flashbots API at blocks.flashbots.net. From this, we chose to use the reward paid to the miner as our metric for quantifying the level of MEV on a block by block basis. Then, we looked at the range of miner reward payments across the dataset and split this up into quaters (using the .describe() function). This then gave us 4 distict classes for the level of MEV in each block, with 1 corresponding to a relatively low level of MEV and 4 corresponding to a relatively high level of MEV. Next, we have filled in the dataset for any blocks that the flashbots API has not identified as containing any MEV - these blocks were then given a class of '0' under the MEV_category column. The resulting dataframe is then used for markov chain transition modelling as well as in our deep learning models. For the purposes of deep learning, we have also created a second dataset. This second dataset is the same as the first, with 2 additional columns added (gas_used_ratio and eth_price_volatility). The gas_used ratio was extracted from an alchemy archive API, via calling the eth_feeHistory function and batching requests to recieve information pertaining to 1000 blocks at a time. The price of Ethereum per block was obtained via an infura archive node in which an instance of the ETH-USD chainlink price feed contract was obtained (using web3py library) and the latestRoundData() was called for each block. With the eth price per block, we then used a 50 day rolling standard deviation as a means of quantifying the ethereum price volatility per block. This then gave us our second dataset, which consists of the block number, MEV_category, gas_used_ratio and eth_price_volatility. The second dataset was then also used in our deep learning models to assess whether these extra features would be of any use in predicting MEV.
 
@@ -21,6 +28,8 @@ The Process of making this chain was relatively simple using the inbuilt pivot t
 I used the pivot table to work out the occurrences of each state transitioning into another then divided by the count of the original state to give the conditional probability. 
 What this matrix allows you to read off is given the current level of MEV in the current block, what is the chance of being at any other level in the next time period. 
 This is an extremely fast bit of code to deploy, the matrix only takes a few minutes to make, and you only need the previous blocks MEV state to work out probabilities for the next one, once you have the matrix. Updating the matrix after every block also seems to be a feasible strategy, however given the amount of data I would like to work with ideally adding one days worth of data will make little difference anyway so it may as well be rerun once a day rather than updated after every block.
+
+In then end we had roughly 3 million blocks worth of data to work with, below you can find the transition matrix. What it shows is that there is some connection between the previous blocks MEV level and the next blocks, notably, if the MEV level is 4 in the next block is it over ~10% more likely to be another 4 block compared to coming form a 0 block. It is This is probably not a significant enough result for any kind of implementation because the increase in probability is very low. 
 
 ### DL NN approximation of the Markov chain. 
 Here I took a slightly different approach, instead of manually constructing the transition matrix I approximated it with a DL neural network. The DL neural network has 4 hidden layers each of which are 4 deep. 
