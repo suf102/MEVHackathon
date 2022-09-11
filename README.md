@@ -36,13 +36,15 @@ In then end we had roughly 3 million blocks worth of data to work with, below yo
 ### DL NN approximation of the Markov chain. 
 Here I took a slightly different approach, instead of manually constructing the transition matrix I approximated it with a DL neural network. The DL neural network has 4 hidden layers each of which are 4 deep. 
 This is to replicate the Markov chain matrix. This model took much longer to train than the Markov chain, and would be more difficult to update than the Markov chain, due to the difficulties of having enough data to form a new batch and running the retraining which takes approximately 4 hours. 
-However, in deployment other than the conversion to tensors of the input data it is also pretty quick as one only needs to pass a 4d vector thought he model to get a prediction. 
+However, in deployment other than the conversion to tensors of the input data it is also pretty quick as one only needs to pass a 4d vector thought he model to get a prediction. This approach resulted in a evaluation accuracy of 53% therefore this is not likely a worthwhile avenue of pursuit. 
 ### DL NN for prediction over more periods 
 Lastly I use the 9 length sequences to see if I could produce a network that will create predictions.
 The big advantage of this is that it should capture the data more accurately if it turns out that more than one period previous is required to predict MEV. Of course this took the longest to train of all of the models, but once in deployment would only need to be updated ever so often as a enough new blocks become available. You might be asking why use this strategy over model that looks over the whole data set. The rational is getting MEV data for a past block is computationally very expensive. Therefore using only the last n blocks one could more feasibly implement it as part of a larger algorithm.
 
 ### DL with Gas Fees and Price volatility  
-Here I created a NN that uses not only the MEV data but also the price volatility and the Eth Gas fees to predict the MEV level in the next block. The rational behind this model is that arbitrage and sandwich attacks should occur after movements in the price of ETH. A movement in the price is likely to cause a trade, and therefore there is scope for a sandwich attack. A movement in price is also likely to allow for small discrepancies in prices between exchanges and therefore it opens up opportunities for arbitrage.  
+Here I created a NN that uses not only the MEV data but also the price volatility and the Eth Gas fees to predict the MEV level in the next block. The rational behind this model is that arbitrage and sandwich attacks should occur after movements in the price of ETH. A movement in the price is likely to cause a trade, and therefore there is scope for a sandwich attack. A movement in price is also likely to allow for small discrepancies in prices between exchanges and therefore it opens up opportunities for arbitrage.
+
+This network was run with data with periods from 2 to 900 blocks, none of these revealed a model that would accurately predict the MEV level. However the data set we used was only ~5000 blocks long, with more data it may be possible to find some connection between MEV, gas fees and price volatility. 
 
 ## Observations 
 One of the biggest difficulties with this process was access to good data, finding MEV and working out how much value is being extracted per block is not an easy challenge. Second getting hold of enough data was also tricky. 
