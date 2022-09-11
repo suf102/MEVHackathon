@@ -31,6 +31,8 @@ This is an extremely fast bit of code to deploy, the matrix only takes a few min
 
 In then end we had roughly 3 million blocks worth of data to work with, below you can find the transition matrix. What it shows is that there is some connection between the previous blocks MEV level and the next blocks, notably, if the MEV level is 4 in the next block is it over ~10% more likely to be another 4 block compared to coming form a 0 block. It is This is probably not a significant enough result for any kind of implementation because the increase in probability is very low. 
 
+![Transition Matrix](https://github.com/suf102/MEVHackathon/blob/60fba81405c1b22c9094c68464f0a3a05adb2848/Readmeimages/Transitionmatrix.png)
+
 ### DL NN approximation of the Markov chain. 
 Here I took a slightly different approach, instead of manually constructing the transition matrix I approximated it with a DL neural network. The DL neural network has 4 hidden layers each of which are 4 deep. 
 This is to replicate the Markov chain matrix. This model took much longer to train than the Markov chain, and would be more difficult to update than the Markov chain, due to the difficulties of having enough data to form a new batch and running the retraining which takes approximately 4 hours. 
