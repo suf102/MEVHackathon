@@ -1,5 +1,5 @@
 # MEV hackathon
-This is a submission for the encode and wintermute hackathon September 2022.
+This is a submission for the encode and wintermute hackathon, September 2022.
 
 ## Aims and Introduction
 In this repo, we utilse markov chains and deep learning models in order to assess whether MEV can be predicted as a state change given a previous n number of blocks. 
